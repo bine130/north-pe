@@ -17,12 +17,12 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
-COPY ./requirements.txt /app/requirements.txt
+COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r /app/requirements.txt
+    && pip install --no-cache-dir -r requirements.txt
 
-# Copy all application code
-COPY . /app/
+# Copy all application code to working directory
+COPY . .
 
 # Expose port
 EXPOSE 8000
