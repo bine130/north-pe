@@ -24,8 +24,8 @@ if not DATABASE_URL:
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,  # Verify connections before using them
-    pool_size=10,        # Number of connections to maintain in pool
-    max_overflow=20,     # Maximum overflow connections
+    pool_size=2,         # Number of connections to maintain in pool (reduced for Supabase free tier)
+    max_overflow=5,      # Maximum overflow connections (reduced for Supabase free tier)
     echo=False           # Set to True for SQL query logging
 )
 
