@@ -31,9 +31,9 @@ RUN ls -la /app/ && echo "Python path: $PYTHONPATH" && python -c "import sys; pr
 # Expose port
 EXPOSE 8000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+# Health check (Note: Render will handle health checks, this is optional)
+# HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+#     CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
 
 # Test simple app first, then try main app
-CMD ["sh", "-c", "echo 'Testing simple app...' && python -c 'import simple_test; print(\"simple_test imported OK\")' && echo 'Testing main app...' && python -c 'import main; print(\"main imported OK\")' && python -m uvicorn main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "echo 'Testing simple app...' && python -c 'import simple_test; print(\"simple_test imported OK\")' && echo 'Testing main app...' && python -c 'import main; print(\"main imported OK\")' && python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]

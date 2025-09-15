@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -13,9 +14,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="North PE API", version="1.0.0", lifespan=lifespan)
 
+# CORS origins from environment variable
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:4000").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4000"],
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
