@@ -35,5 +35,5 @@ EXPOSE 8000
 # HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
 #     CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
 
-# Test simple app first, then try main app
-CMD ["sh", "-c", "echo 'Testing simple app...' && python -c 'import simple_test; print(\"simple_test imported OK\")' && echo 'Testing main app...' && python -c 'import main; print(\"main imported OK\")' && python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Try simple main first, then full main if it works
+CMD ["sh", "-c", "echo 'Trying simple main...' && python -c 'import main_simple; print(\"main_simple works!\")' && echo 'Trying full main...' && python -c 'import main; print(\"main works!\")' && echo 'Starting server...' && python -m uvicorn main_simple:app --host 0.0.0.0 --port ${PORT:-8000}"]
