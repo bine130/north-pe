@@ -16,13 +16,13 @@ RUN apt-get update \
         curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy and install Python dependencies
-COPY requirements.txt .
+# Copy requirements first for better caching
+COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy application code
-COPY . .
+# Copy all application code
+COPY . /app/
 
 # Expose port
 EXPOSE 8000
