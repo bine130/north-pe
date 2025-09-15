@@ -35,7 +35,7 @@ app.include_router(test_weekly.router)
 
 @app.get("/")
 async def root():
-    return {"message": "North PE API is running"}
+    return {"message": "North PE API is running", "cors_origins": CORS_ORIGINS}
 
 @app.get("/health")
 async def health_check():
