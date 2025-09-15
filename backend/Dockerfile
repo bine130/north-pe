@@ -12,24 +12,17 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         gcc \
-        g++ \
         libpq-dev \
+        curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements file
+# Copy and install Python dependencies
 COPY requirements.txt .
-
-# Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
-
-# Create non-root user
-RUN useradd --create-home --shell /bin/bash app \
-    && chown -R app:app /app
-USER app
 
 # Expose port
 EXPOSE 8000
