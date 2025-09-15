@@ -25,8 +25,8 @@ RUN pip install --no-cache-dir --upgrade pip \
 # Copy all application code to working directory
 COPY . .
 
-# Debug: List files to verify structure
-RUN ls -la /app/ && echo "Python path: $PYTHONPATH" && python -c "import sys; print('Python sys.path:', sys.path)"
+# Debug: List files to verify structure and check main.py
+RUN ls -la /app/ && echo "Checking for main.py:" && ls -la /app/main.py && echo "Current directory:" && pwd
 
 # Expose port
 EXPOSE 8000
