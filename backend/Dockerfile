@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 COPY . .
 
 # Debug: List files to verify structure and check main.py
-RUN ls -la /app/ && echo "Checking for main.py:" && ls -la /app/main.py && echo "Current directory:" && pwd
+RUN ls -la /app/ && echo "Finding main.py:" && find /app -name "main.py" && echo "Current directory:" && pwd
 
 # Expose port
 EXPOSE 8000
