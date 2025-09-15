@@ -36,4 +36,4 @@ EXPOSE 8000
 #     CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
 
 # Try simple main first, then full main if it works
-CMD ["sh", "-c", "echo 'Testing main import...' && python -c 'import main; print(\"main works!\")' && echo 'Starting server...' && python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
