@@ -109,7 +109,7 @@ export interface TemplateUpdate {
 export const topicApi = {
   getAll: async (category?: string) => {
     const params = category ? { category } : {};
-    const response = await api.get<Topic[]>('/topics', { params });
+    const response = await api.get<Topic[]>('/topics/', { params });
     return response.data;
   },
 
@@ -119,7 +119,7 @@ export const topicApi = {
   },
 
   create: async (topic: TopicCreate) => {
-    const response = await api.post<Topic>('/topics', topic);
+    const response = await api.post<Topic>('/topics/', topic);
     return response.data;
   },
 
@@ -133,7 +133,7 @@ export const topicApi = {
   },
 
   search: async (query: string, searchType: string = 'all') => {
-    const response = await api.get<Topic[]>('/topics/search', {
+    const response = await api.get<Topic[]>('/topics/search/', {
       params: { q: query, search_type: searchType },
     });
     return response.data;
