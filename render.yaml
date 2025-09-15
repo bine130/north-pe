@@ -1,0 +1,38 @@
+services:
+  # Backend API Service
+  - type: web
+    name: north-pe-backend
+    env: python
+    repo: https://github.com/bine130/north-pe.git
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        sync: false  # Set this in Render dashboard
+      - key: SUPABASE_URL
+        sync: false  # Set this in Render dashboard
+      - key: SUPABASE_ANON_KEY
+        sync: false  # Set this in Render dashboard
+      - key: PYTHON_VERSION
+        value: 3.11.5
+    healthCheckPath: /health
+
+  # Frontend Service (Static Site)
+  - type: web
+    name: north-pe-frontend
+    env: static
+    repo: https://github.com/bine130/north-pe.git
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./build
+    plan: free
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://north-pe-backend.onrender.com  # Update with your actual backend URL
+    buildFilter:
+      paths:
+        - frontend/**
+      ignoredPaths:
+        - backend/**

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from database import get_db
+from database_config import get_db
 from models import WeeklyExam, ExamQuestion, QuestionType, Category
 from schemas import WeeklyExamCreate, WeeklyExamResponse, ExamQuestionCreate
 

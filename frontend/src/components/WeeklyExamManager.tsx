@@ -105,7 +105,7 @@ const WeeklyExamManager: React.FC = () => {
 
   const loadCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/categories');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:9000'}/api/categories`);
       setCategories(response.data);
     } catch (error) {
       message.error('카테고리를 불러오는데 실패했습니다.');
@@ -114,7 +114,7 @@ const WeeklyExamManager: React.FC = () => {
 
   const loadWeeklyExams = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/weekly-exams-direct');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:9000'}/weekly-exams-direct`);
       setWeeklyExams(response.data);
     } catch (error) {
       message.error('주간모의고사를 불러오는데 실패했습니다.');
@@ -199,7 +199,7 @@ const WeeklyExamManager: React.FC = () => {
         questions: [...session1Qs, ...session2Qs],
       };
 
-      await axios.post('http://localhost:8000/weekly-exams-direct', examData);
+      await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:9000'}/weekly-exams-direct`, examData);
 
       message.success('주간모의고사가 성공적으로 등록되었습니다.');
       setIsCreateModalVisible(false);
