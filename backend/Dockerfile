@@ -1,5 +1,5 @@
-# Use Python 3.11 slim image
-FROM python:3.11-slim
+# Use Python 3.10 slim image (more stable)
+FROM python:3.10-slim
 
 # Set working directory
 WORKDIR /app
@@ -35,5 +35,5 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
-# Command to run the application with more verbose output
-CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Test simple app first, then try main app
+CMD ["sh", "-c", "echo 'Testing simple app...' && python -c 'import simple_test; print(\"simple_test imported OK\")' && echo 'Testing main app...' && python -c 'import main; print(\"main imported OK\")' && python -m uvicorn main:app --host 0.0.0.0 --port 8000"]
