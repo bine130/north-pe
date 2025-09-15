@@ -27,7 +27,6 @@ import {
   AlignRightOutlined,
   PictureOutlined,
   TableOutlined,
-  BgColorsOutlined,
   MergeCellsOutlined,
   SplitCellsOutlined,
   PlusOutlined as PlusIcon,
@@ -52,7 +51,6 @@ import { Template, TemplateCreate, TemplateUpdate, templateApi } from '../servic
 import './TopicEditor.css';
 
 const { TextArea } = Input;
-const { Option } = Select;
 const { Text } = Typography;
 
 const TemplateManager: React.FC = () => {

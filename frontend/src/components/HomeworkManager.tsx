@@ -22,7 +22,6 @@ import {
   PlusOutlined,
   BookOutlined,
   ExperimentOutlined,
-  EditOutlined,
   EyeOutlined,
   CalendarOutlined,
   UserOutlined,
@@ -30,14 +29,11 @@ import {
   ClockCircleOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import { Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { useEditor, EditorContent } from '@tiptap/react';
-import dayjs from 'dayjs';
 
 const { TabPane } = Tabs;
-const { Title, Text } = Typography;
-const { TextArea } = Input;
+const { Title } = Typography;
 const { Option } = Select;
 
 interface HomeworkTarget {
